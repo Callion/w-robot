@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateAutomations < ActiveRecord::Migration
   def change
     create_table :automations do |t|

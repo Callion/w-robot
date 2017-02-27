@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Documentation comment
 class Automation < ActiveRecord::Base
   has_many :procedures

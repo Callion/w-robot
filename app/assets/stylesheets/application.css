@@ -16,3 +16,48 @@
  input[type=checkbox][disabled][checked]{
      outline:2px solid red;
  }
+.position label{
+    width: 60%;
+}
+.position .form-control{
+    width: 40%;
+    margin-left: -5px;
+}
+.name label{
+    width: 10%;
+}
+.name .form-control{
+    width: 90%;
+    margin-left: -5px;
+}
+.name{
+  width: 100%;
+}
+.active label{
+    width: 50%;
+}
+.active .form-control{
+    width: 50%;
+    margin-left: -5px;
+}
+.script label{
+    width: 10%;
+}
+.script .form-control{
+    width: 90%;
+    margin-left: -5px;
+}
+.script.wrong .form-control{
+    background-color: #fca5a5;
+}
+.script{
+  width: 100%;
+}
+.mb-10{
+  margin-bottom: 15px;
+}
+.form-inline >.row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

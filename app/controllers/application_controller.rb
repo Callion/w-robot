@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Documentation comment
 class ApplicationController < ActionController::Base
   include ErrorHelper

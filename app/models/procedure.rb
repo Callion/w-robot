@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Documentation comment
 class Procedure < ActiveRecord::Base
   belongs_to :automation

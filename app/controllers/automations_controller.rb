@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Documentation comment
 class AutomationsController < ApplicationController
   before_action :set_automation, only: [:edit, :update, :destroy]
@@ -19,7 +20,11 @@ class AutomationsController < ApplicationController
                        alert: 'Automation wasn\'t executed.' unless automation.data.present?
     automation.data.each do |procedure|
       handler_was_not_working
-      eval('browser.' + procedure.script) rescue handler(procedure, automation)
+      begin
+        eval('browser.' + procedure.script)
+      rescue
+        handler(procedure, automation)
+      end
       procedure.update(broken: false) unless handler_worked?
     end
     browser.close
