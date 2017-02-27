@@ -24,7 +24,7 @@ class AutomationsController < ApplicationController
     end
     browser.close
     if automation.errors.any?
-      redirect_to edit_automation_path(automation), alert: automation.errors
+      redirect_to edit_automation_path(automation), alert: form_errors(automation.errors)
     else
       redirect_to automations_path(@automations), notice: 'Automation was successfully executed.'
     end
@@ -77,7 +77,7 @@ class AutomationsController < ApplicationController
 
   def handler(procedure, automation)
     procedure.update(broken: true)
-    automation.errors.add(:procedure, message: "Procedure at #{procedure.position}. position failed!")
+    automation.errors.add(:procedure, "Procedure at #{procedure.position}. position failed!")
     handler_was_working
   end
 
