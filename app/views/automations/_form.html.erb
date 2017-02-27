@@ -1,0 +1,56 @@
+<%= form_for(setup_automation(@automation)) do |f| %>
+
+  <% if @automation.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@automation.errors.count, "error") %> prohibited this automation from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @automation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%=f.error_span(:name) %>
+    <%= f.label :active %>
+    <%= f.check_box :active %>
+    <%=f.error_span(:active) %>
+  </div>
+
+  <h2>Procedures</h2>
+
+  <%= f.fields_for :procedures do |t| %>
+    <div>
+      <%= t.label :position %>
+      <%= t.text_field :position %>
+
+      <%= t.label :script %>
+      <%= t.text_field :script %>
+
+      <% if t.object.persisted? %>
+        <%= t.check_box :broken, disabled: true %>
+        <%= t.label :broken %>
+
+        <%= t.check_box :_destroy %>
+        <%= t.label :_destroy, "Cut" %>
+      <% end %>
+    </div >
+  <% end %>
+  <br>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                automations_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
