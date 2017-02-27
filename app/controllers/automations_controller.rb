@@ -18,10 +18,16 @@ class AutomationsController < ApplicationController
     return redirect_to automations_path(@automations),
                        alert: 'Automation wasn\'t executed.' unless automation.data.present?
     automation.data.each do |procedure|
+      handler_was_not_working
       eval('browser.' + procedure.script) rescue handler(procedure, automation)
+      procedure.update(broken: false) unless handler_worked?
     end
     browser.close
-    return redirect_to automations_path(@automations), notice: 'Automation was successfully executed.'
+    if automation.errors.any?
+      redirect_to edit_automation_path(automation), alert: automation.errors
+    else
+      redirect_to automations_path(@automations), notice: 'Automation was successfully executed.'
+    end
   end
 
   def create
@@ -71,7 +77,8 @@ class AutomationsController < ApplicationController
 
   def handler(procedure, automation)
     procedure.update(broken: true)
-    return redirect_to edit_automation_path(automation), alert: 'Something went wrong with evaluation'
+    automation.errors.add(:procedure, message: "Procedure at #{procedure.position}. position failed!")
+    handler_was_working
   end
 
   def set_automation
@@ -85,6 +92,18 @@ class AutomationsController < ApplicationController
                                                                :position,
                                                                :script,
                                                                :_destroy])
+  end
+
+  def handler_was_working
+    @handler_worked ||= true
+  end
+
+  def handler_was_not_working
+    @handler_worked ||= false
+  end
+
+  def handler_worked?
+    @handler_worked
   end
 
   def browser
