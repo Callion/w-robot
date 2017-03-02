@@ -27,6 +27,7 @@ class AutomationsController < ApplicationController
         eval('browser.' + procedure.script)
       rescue
         handler(procedure, automation)
+        break
       end
       procedure.update(broken: false) unless handler_worked?
     end

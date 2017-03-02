@@ -13,9 +13,6 @@
  *= require_tree .
  *= require_self
  */
- input[type=checkbox][disabled][checked]{
-     outline:2px solid red;
- }
 .position label{
     width: 60%;
 }
@@ -47,8 +44,11 @@
     width: 90%;
     margin-left: -5px;
 }
-.script.wrong .form-control{
+.script.invalid .form-control{
     background-color: #fca5a5;
+}
+.script.valid .form-control{
+    background-color: #a5fcac;
 }
 .script{
   width: 100%;

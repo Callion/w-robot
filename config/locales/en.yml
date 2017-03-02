@@ -20,9 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  activerecord:
-    enums:
-      browser_types:
-        firefox: 'Firefox'
-        chrome: 'Chrome'
-        phantomjs: 'PhantomJs'
+  enums:
+    browser_types:
+      firefox: 'Firefox'
+      chrome: 'Chrome'
+      phantomjs: 'PhantomJs'
+    booleans:
+      'true': 'Yes'
+      'false': 'No'
+    wtf:
+      aha: ne
+      abe: jo

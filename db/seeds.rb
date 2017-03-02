@@ -16,12 +16,12 @@ script1 = { 1 => "goto 'seznam.cz'",
 
 puts 'CREATING AUTOMATIONS'
 
-automation = Automation.create(name: 'Automatický email', active: true)
+automation = Automation.create(name: 'Automatický email', active: true, browser_type: 'chrome')
 
 puts 'ADDING PROCEDURES'
 
 script1.keys.each do |key|
-  Procedure.create(automation_id: automation.id, position: key, script: script1[key])
+  Procedure.create(automation_id: automation.id, position: key, script: script1[key], broken: nil)
 end
 
 puts 'DB SUCCESSFULLY SEEDED'

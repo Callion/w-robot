@@ -29,8 +29,6 @@ gem 'twitter-bootstrap-rails'
 
 gem 'selenium-webdriver', '~> 3.2', '>= 3.2.1'
 
-gem 'capybara', '~> 2.7', '>= 2.7.1'
-
 gem 'watir', '~> 6.2'
 
 gem 'rubocop'

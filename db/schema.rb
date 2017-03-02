@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302121948) do
+ActiveRecord::Schema.define(version: 20170302174403) do
 
   create_table "automations", force: :cascade do |t|
     t.string   "name"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20170302121948) do
     t.integer "automation_id"
     t.integer "position"
     t.string  "script"
-    t.boolean "broken",        default: false
+    t.boolean "broken"
   end
 
 end
