@@ -38,18 +38,20 @@
 
   <h2>Procedures</h2>
   <hr>
+  <% @pos_next = 0 %>
   <%= f.fields_for :procedures do |t| %>
+    <% @pos_next += 1 %>
     <div class='row mb-10'>
       <div class='col-md-2'>
         <div class='form-group position'>
           <%= t.label :position %>
-          <%= t.text_field :position, class: 'form-control' %>
+          <%= t.text_field :position, class: 'form-control', placeholder: @pos_next %>
         </div>
       </div>
       <div class='col-md-8'>
         <div class="form-group script <%= form_coloring(t.object.broken) %>">
           <%= t.label :script %>
-          <%= t.text_field :script, class: 'form-control' %>
+          <%= t.text_field :script, class: 'form-control', placeholder: 'Enter evaluatable script' %>
         </div>
       </div>
 
