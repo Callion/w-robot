@@ -16,7 +16,7 @@ script1 = { 1 => "goto 'seznam.cz'",
 
 puts 'CREATING AUTOMATIONS'
 
-automation = Automation.create(name: 'Automatický email', active: true)
+automation = Automation.create(name: 'Automatický email', active: true, browser_type: 'chrome')
 
 puts 'ADDING PROCEDURES'
 

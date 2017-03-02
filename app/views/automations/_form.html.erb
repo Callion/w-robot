@@ -19,14 +19,18 @@
       <div class='form-group name'>
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control' %>
-        <%=f.error_span(:name) %>
       </div>
     </div>
-    <div class='col-md-4'>
+    <div class='col-md-2'>
+      <div class= 'form-group'>
+        <%= f.label :browser_type %>
+        <%= f.select :browser_type, options_for_browser_types, include_blank: false, class: 'form-control' %>
+      </div>
+    </div>
+    <div class='col-md-2'>
       <div class='checkbox'>
         <label>
           <%= f.check_box :active %> Active
-          <%=f.error_span(:active) %>
         </label>
       </div>
     </div>
@@ -43,7 +47,7 @@
         </div>
       </div>
       <div class='col-md-8'>
-        <div class="form-group script <%= 'wrong' if t.object.broken %>">
+        <div class="form-group script <%= form_coloring(t.object.broken) %>">
           <%= t.label :script %>
           <%= t.text_field :script, class: 'form-control' %>
         </div>
@@ -63,7 +67,7 @@
   <br>
 
   <div class="form-group">
-    <div class="col-lg-offset-6 col-lg-10">
+    <div class="col-lg-offset-6 col-lg-12">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', default: t("helpers.links.cancel")),
                 automations_path, class: 'btn btn-default' %>
