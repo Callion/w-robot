@@ -21,7 +21,7 @@ automation = Automation.create(name: 'Automatický email', active: true, browser
 puts 'ADDING PROCEDURES'
 
 script1.keys.each do |key|
-  Procedure.create(automation_id: automation.id, position: key, script: script1[key], broken: nil)
+  Procedure.create(automation_id: automation.id, position: key, script: script1[key])
 end
 
 puts 'DB SUCCESSFULLY SEEDED'
