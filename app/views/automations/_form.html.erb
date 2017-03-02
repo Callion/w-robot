@@ -22,7 +22,13 @@
         <%=f.error_span(:name) %>
       </div>
     </div>
-    <div class='col-md-4'>
+    <div class='col-md-2'>
+      <div class= 'form-group'>
+        <%= f.label :browser_type %>
+        <%= f.select :browser_type, options_for_browser_types, include_blank: false %>
+      </div>
+    </div>
+    <div class='col-md-2'>
       <div class='checkbox'>
         <label>
           <%= f.check_box :active %> Active

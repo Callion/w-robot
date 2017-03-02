@@ -4,6 +4,7 @@ class Automation < ActiveRecord::Base
   has_many :procedures
 
   validates :name, presence: true
+  validates :browser_type, presence: true
 
   accepts_nested_attributes_for :procedures,
                                 allow_destroy: true,

@@ -3,6 +3,8 @@
 class AutomationsController < ApplicationController
   before_action :set_automation, only: [:edit, :update, :destroy]
 
+  DEFAULT_TIMEOUT = 5
+
   def index
     @automations = Automation.all
   end
@@ -18,6 +20,7 @@ class AutomationsController < ApplicationController
     automation = Automation.find(params[:automation_id])
     return redirect_to automations_path(@automations),
                        alert: 'Automation wasn\'t executed.' unless automation.data.present?
+    browser = Html::Browser.new(timeout: DEFAULT_TIMEOUT, type: automation.browser_type).object
     automation.data.each do |procedure|
       handler_was_not_working
       begin
@@ -91,7 +94,7 @@ class AutomationsController < ApplicationController
   end
 
   def automation_params
-    params.require(:automation).permit(:name, :active, :data,
+    params.require(:automation).permit(:name, :active, :data, :browser_type,
                                        procedures_attributes: [:id,
                                                                :automation_id,
                                                                :position,
@@ -109,9 +112,5 @@ class AutomationsController < ApplicationController
 
   def handler_worked?
     @handler_worked
-  end
-
-  def browser
-    @browser ||= Watir::Browser.new :firefox
   end
 end

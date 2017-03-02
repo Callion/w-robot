@@ -8,10 +8,10 @@ Bundler.require(*Rails.groups)
 
 module Wrobot
   class Application < Rails::Application
-    # SELECT YOUR driver_path ACCORDING TO YOUR OPERATING SYSTEM //lib/drivers/.
+    # SELECT YOUR "#{browser_type}"_path ACCORDING TO YOUR OPERATING SYSTEM //lib/drivers/.
 
-    Selenium::WebDriver::Chrome.driver_path = 'lib/drivers/linux/chromedriver'
-    Selenium::WebDriver::Firefox.driver_path = 'lib/drivers/linux/geckodriver'
+    config.firefox_path = 'lib/drivers/linux/geckodriver'
+    config.chrome_path = 'lib/drivers/linux/chromedriver'
 
     config.active_record.raise_in_transactional_callbacks = true
   end
