@@ -3,9 +3,7 @@
 one:
   name: MyString
   active: false
-  data: MyString
 
 two:
   name: MyString
   active: false
-  data: MyString

@@ -1,11 +1,18 @@
 # frozen_string_literal: true
+puts 'CREATING TEST USER'
+user = User.new
+user.email = 'test@example.com'
+user.password = 'test123'
+user.password_confirmation = 'test123'
+user.save!
+
 puts 'GENERATING SCRIPT HASHES'
 # Automated email
 script1 = { 1 => "goto 'seznam.cz'",
             2 => "element(css: 'button.expander__button').click",
             3 => "text_field(placeholder: 'jméno').set 'TestingPurpose123@seznam.cz'",
             4 => "text_field(placeholder: 'heslo').set 'Password123'",
-            5 => "element(xpath: '//div/div/div/div[1]/div[2]/div/div/div[4]/div[2]/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[2]/form/div[2]/div/button').click",
+            5 => "button(class: 'button button--submit button--with-input input-w-button__button').click",
             6 => "element(css: 'a.wm-button').click",
             7 => "textarea(css: 'textarea').set 'MValda@seznam.cz'",
             8 => "textarea(xpath: '//div[4]/div[2]/div/div/div[2]/div[5]/textarea').set 'TEST'",
@@ -16,7 +23,7 @@ script1 = { 1 => "goto 'seznam.cz'",
 
 puts 'CREATING AUTOMATIONS'
 
-automation = Automation.create(name: 'Automatický email', active: true, browser_type: 'chrome')
+automation = Automation.create(name: 'Automatický email', active: true, browser_type: 'chrome', user_id: user.id)
 
 puts 'ADDING PROCEDURES'
 
@@ -25,3 +32,4 @@ script1.keys.each do |key|
 end
 
 puts 'DB SUCCESSFULLY SEEDED'
+puts 'for login - username: test@example.com  //  password: test123'

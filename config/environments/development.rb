@@ -19,4 +19,6 @@ Rails.application.configure do
   config.assets.digest = true
 
   config.assets.raise_runtime_errors = true
+
+  config.action_mailer.default_url_options = { host: 'dev.yourhost.com' }
 end

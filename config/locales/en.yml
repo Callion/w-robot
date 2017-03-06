@@ -20,6 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  automations:
+    title: Automation
+    new: New automation
+  users:
+    title: User
+    edit: Settings
+    log_out: Log out
   enums:
     browser_types:
       firefox: 'Firefox'

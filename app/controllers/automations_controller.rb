@@ -13,13 +13,14 @@ class AutomationsController < ApplicationController
     @automation = Automation.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def execute
     automation = Automation.find(params[:automation_id])
-    return redirect_to automations_path(@automations),
-                       alert: 'Automation wasn\'t executed.' unless automation.data.present?
+    unless automation.data.present?
+      return redirect_to automations_path(@automations),
+                         alert: 'Automation wasn\'t executed.'
+    end
     browser = Html::Browser.new(timeout: DEFAULT_TIMEOUT, type: automation.browser_type).object
     automation.data.each do |procedure|
       handler_was_not_working

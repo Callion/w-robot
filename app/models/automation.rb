@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 # Documentation comment
 class Automation < ActiveRecord::Base
+  belongs_to :user
   has_many :procedures
 
   validates :name, presence: true

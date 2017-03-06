@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 module Html
   class Browser
     FIREFOX = 'firefox'
     CHROME = 'chrome'
     PHANTOMJS = 'phantomjs'
 
-    BROWSERS = [FIREFOX, CHROME, PHANTOMJS]
+    BROWSERS = [FIREFOX, CHROME, PHANTOMJS].freeze
 
     def initialize(options = {})
       @timeout = options[:timeout]
@@ -17,10 +18,10 @@ module Html
       case @type
       when CHROME
         driver = Selenium::WebDriver.for :chrome,
-                                          driver_path: Rails.application.config.chrome_path
+                                         driver_path: Rails.application.config.chrome_path
       when FIREFOX
         driver = Selenium::WebDriver.for :firefox,
-                                          driver_path: Rails.application.config.firefox_path
+                                         driver_path: Rails.application.config.firefox_path
       when PHANTOMJS
         driver = Selenium::WebDriver.for :phantomjs
         driver.manage.window.maximize
