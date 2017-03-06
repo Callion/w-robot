@@ -6,7 +6,7 @@ class AutomationsController < ApplicationController
   DEFAULT_TIMEOUT = 5
 
   def index
-    @automations = Automation.all
+    @automations = Automation.all.where(user_id: current_user.id)
   end
 
   def new
@@ -32,7 +32,7 @@ class AutomationsController < ApplicationController
       end
       procedure.update(broken: false) unless handler_worked?
     end
-    browser.close
+    browser.close if browser.present?
     if automation.errors.any?
       redirect_to edit_automation_path(automation), alert: form_errors(automation.errors)
     else
@@ -42,7 +42,7 @@ class AutomationsController < ApplicationController
 
   def create
     @automation = Automation.new(automation_params)
-
+    @automation.set_user(current_user)
     respond_to do |format|
       if @automation.save
         format.html { redirect_to edit_automation_path(@automation), notice: 'Automation was successfully created.' }
@@ -96,7 +96,7 @@ class AutomationsController < ApplicationController
   end
 
   def automation_params
-    params.require(:automation).permit(:name, :active, :data, :browser_type,
+    params.require(:automation).permit(:name, :active, :data, :browser_type, :user_id,
                                        procedures_attributes: [:id,
                                                                :automation_id,
                                                                :position,

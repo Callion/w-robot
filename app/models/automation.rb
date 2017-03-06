@@ -5,6 +5,7 @@ class Automation < ActiveRecord::Base
   has_many :procedures
 
   validates :name, presence: true
+  validates :user_id, presence: true
   validates :browser_type, presence: true
 
   accepts_nested_attributes_for :procedures,
@@ -13,5 +14,9 @@ class Automation < ActiveRecord::Base
 
   def data
     procedures.by_position
+  end
+
+  def set_user(user)
+    self.user_id ||= user.id
   end
 end

@@ -17,7 +17,7 @@
   <tbody>
     <% @automations.each do |automation| %>
       <tr>
-        <td><%= link_to automation.id, automation_path(automation) %></td>
+        <td><%= automation.id %></td>
         <td><%= automation.name %></td>
         <td><%= I18n.t("enums.booleans.#{automation.active}") %></td>
         <td>
