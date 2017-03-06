@@ -7,7 +7,7 @@ user.password_confirmation = 'test123'
 user.save!
 
 puts 'GENERATING SCRIPT HASHES'
-# Automated email
+# Automated email no. 1
 script1 = { 1 => "goto 'seznam.cz'",
             2 => "element(css: 'button.expander__button').click",
             3 => "text_field(placeholder: 'jméno').set 'TestingPurpose123@seznam.cz'",
@@ -21,14 +21,31 @@ script1 = { 1 => "goto 'seznam.cz'",
             11 => "textarea(class: 'editor-content').set 'Dobrý den! Tento email byl automaticky vygenerován webovým robotem! Mazec Wau!'",
             12 => "element(xpath: '//div[4]/div[2]/div/div/div[4]/div/a[1]').click" }
 
+script2 = { 1 => "goto 'http://pocasi.idnes.cz'",
+            2 => "element(xpath: '//div[5]/div[3]/div/div/div/div[2]/div[1]/div[6]/div/p').select_text browser.element(xpath: '//div[5]/div[3]/div/div/div/div[2]/div[1]/div[6]/div/p').text.lines[0]",
+            3 => "send_keys [:command, 'c']",
+            4 => "goto 'poslatsms.cz'",
+            5 => "textarea(id: 'textsms').set 'Předpověd na datum: '",
+            6 => "textarea(id: 'textsms').append (Time.zone.now + 1.day).to_date",
+            7 => "textarea(id: 'textsms').append ' - '",
+            8 => "textarea(id: 'textsms').send_keys [:command, 'v']",
+            9 => "text_field(name: 'cislo-prijemce').set '775191055'",
+            10 => "element(id: 'odeslat-sms').click",
+            11 => "element(id: 'odeslat-sms').wait_while_present" }
+
 puts 'CREATING AUTOMATIONS'
 
-automation = Automation.create(name: 'Automatický email', active: true, browser_type: 'chrome', user_id: user.id)
+automation1 = Automation.create(name: 'Zaslání emailu', active: true, browser_type: 'chrome', user_id: user.id)
+automation2 = Automation.create(name: 'Předpověd počasí', active: true, browser_type: 'firefox', user_id: user.id)
 
 puts 'ADDING PROCEDURES'
 
 script1.keys.each do |key|
-  Procedure.create(automation_id: automation.id, position: key, script: script1[key])
+  Procedure.create(automation_id: automation1.id, position: key, script: script1[key])
+end
+
+script2.keys.each do |key|
+  Procedure.create(automation_id: automation2.id, position: key, script: script2[key])
 end
 
 puts 'DB SUCCESSFULLY SEEDED'

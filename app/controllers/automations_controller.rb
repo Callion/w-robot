@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 # Documentation comment
+require 'watir/extensions/select_text'
+
 class AutomationsController < ApplicationController
   before_action :set_automation, only: [:edit, :update, :destroy]
 
