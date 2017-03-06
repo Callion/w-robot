@@ -19,7 +19,7 @@ class AutomationsControllerTest < ActionController::TestCase
 
   test 'should create automation' do
     assert_difference('Automation.count') do
-      post :create, automation: { active: @automation.active, data: @automation.data, name: @automation.name }
+      post :create, automation: { active: @automation.active, name: @automation.name }
     end
 
     assert_redirected_to automation_path(assigns(:automation))
@@ -36,7 +36,7 @@ class AutomationsControllerTest < ActionController::TestCase
   end
 
   test 'should update automation' do
-    patch :update, id: @automation, automation: { active: @automation.active, data: @automation.data, name: @automation.name }
+    patch :update, id: @automation, automation: { active: @automation.active, name: @automation.name }
     assert_redirected_to automation_path(assigns(:automation))
   end
 

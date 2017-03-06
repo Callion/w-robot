@@ -56,8 +56,29 @@
 .mb-10{
   margin-bottom: 15px;
 }
+.form-inline{
+  padding-bottom: 50px;
+}
 .form-inline >.row{
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+.devise{
+  position: fixed;
+  top: 23%;
+  left: 45%;
+  margin-top: -50px;
+  margin-left: -100px;
+  text-align: center;
+}
+.devise.edit{
+  left: 35%;
+}
+.footer {
+   position: fixed;
+   width: inherit;
+   bottom: 0;
+   text-align: center;
+   background-color: whitesmoke;
 }

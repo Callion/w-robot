@@ -40,17 +40,21 @@
           <div class="well sidebar-nav">
             <h3>Menu</h3>
             <ul class="nav nav-list">
-              <li class="nav-header">Automations</li>
-              <li><%= link_to t('.new', default: t("helpers.links.new")),
-                                        new_automation_path %></li>
+              <% unless current_user.nil? %>
+                <li class="nav-header"><%= I18n.t('automations.title') %></li>
+                <li><%= link_to I18n.t('automations.new'), new_automation_path %></li>
+                <li class="nav-header"><%= I18n.t('users.title') %></li>
+                <li><%= link_to I18n.t('users.edit'), edit_user_registration_path %></li>
+                <li><%= link_to I18n.t('users.log_out'), destroy_user_session_path, method: :delete %></li>
+              <% end %>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
       </div><!--/row-->
 
-      <footer>
+      <div class='footer'>
         <p>&copy; Marek Valda - 2017</p>
-      </footer>
+      </div>
 
     </div> <!-- /container -->
 
