@@ -16,7 +16,7 @@
             </tr>
           </thead>
           <tbody>
-            <% automation.data.each do |procedure| %>
+            <% automation.procedures.by_position.each do |procedure| %>
               <tr>
                 <td><%= procedure.position %></td>
                 <td><%= procedure.script %></td>

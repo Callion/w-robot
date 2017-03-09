@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'automations#index'
 
-  resources :automations do
+  resources :automations, except: :show do
     post 'execute'
     resource :procedures, only: [:edit, :update]
   end

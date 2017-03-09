@@ -5,10 +5,8 @@ require 'watir/extensions/select_text'
 class AutomationsController < ApplicationController
   before_action :set_automation, only: [:edit, :update, :destroy]
 
-  DEFAULT_TIMEOUT = 5
-
   def index
-    @automations = Automation.all.where(user_id: current_user.id)
+    @automations = current_user.automations
   end
 
   def new
@@ -18,33 +16,19 @@ class AutomationsController < ApplicationController
   def edit; end
 
   def execute
-    automation = Automation.find(params[:automation_id])
-    unless automation.data.present?
-      return redirect_to automations_path(@automations),
-                         alert: 'Automation wasn\'t executed.'
-    end
-    browser = Html::Browser.new(timeout: DEFAULT_TIMEOUT, type: automation.browser_type).object
-    automation.data.each do |procedure|
-      handler_was_not_working
-      begin
-        eval('browser.' + procedure.script)
-      rescue
-        handler(procedure, automation)
-        break
-      end
-      procedure.update(broken: false) unless handler_worked?
-    end
-    browser.close if browser.present?
-    if automation.errors.any?
-      redirect_to edit_automation_path(automation), alert: form_errors(automation.errors)
+    automation = current_user.automations.find(params[:automation_id])
+    executor = Automations::Executor.new(automation)
+
+    if executor.run
+      redirect_to automations_path, notice: 'Automation was successfully executed.'
     else
-      redirect_to automations_path(@automations), notice: 'Automation was successfully executed.'
+      procedure = automation.procedures.where(broken: true).first
+      redirect_to edit_automation_path(automation), alert: "Procedure at #{procedure.position}. position failed!"
     end
   end
 
   def create
-    @automation = Automation.new(automation_params)
-    @automation.set_user(current_user)
+    @automation = current_user.automations.new(automation_params)
     respond_to do |format|
       if @automation.save
         format.html { redirect_to edit_automation_path(@automation), notice: 'Automation was successfully created.' }
@@ -87,14 +71,8 @@ class AutomationsController < ApplicationController
 
   private
 
-  def handler(procedure, automation)
-    procedure.update(broken: true)
-    automation.errors.add(:procedure, "Procedure at #{procedure.position}. position failed!")
-    handler_was_working
-  end
-
   def set_automation
-    @automation = Automation.find(params[:id])
+    @automation = current_user.automations.find(params[:id])
   end
 
   def automation_params
@@ -104,17 +82,5 @@ class AutomationsController < ApplicationController
                                                                :position,
                                                                :script,
                                                                :_destroy])
-  end
-
-  def handler_was_working
-    @handler_worked ||= true
-  end
-
-  def handler_was_not_working
-    @handler_worked ||= false
-  end
-
-  def handler_worked?
-    @handler_worked
   end
 end
