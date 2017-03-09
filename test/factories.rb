@@ -7,15 +7,16 @@ FactoryGirl.define do
   end
 
   factory :automation do
-    name 'MyString'
+    name 'MyAutomation'
     active false
-    browser_type 'Firefox'
+    browser_type 'phantomjs'
     user
   end
 
   factory :procedure do
     automation
     position 1
-    script "goto 'google.cz'"
+    action :goto
+    input 'localhost:3000'
   end
 end

@@ -7,28 +7,20 @@ module Html
 
     BROWSERS = [FIREFOX, CHROME, PHANTOMJS].freeze
 
-    def initialize(options = {})
-      @timeout = options[:timeout]
-      @type = options[:type]
-      start_up
+    def initialize(timeout, type)
+      @timeout = timeout
+      @type = type
     end
 
-    def start_up
-      driver = nil
-      case @type
-      when CHROME
-        driver = Selenium::WebDriver.for :chrome,
-                                         driver_path: Rails.application.config.chrome_path
-      when FIREFOX
-        driver = Selenium::WebDriver.for :firefox,
-                                         driver_path: Rails.application.config.firefox_path
-      when PHANTOMJS
-        driver = Selenium::WebDriver.for :phantomjs
-        driver.manage.window.maximize
-      else
-        return
+    def driver
+      @driver ||= case @type
+                  when CHROME
+                    Selenium::WebDriver.for :chrome, driver_path: Rails.application.config.chrome_path
+                  when FIREFOX
+                    Selenium::WebDriver.for :firefox, driver_path: Rails.application.config.firefox_path
+                  when PHANTOMJS
+                    Selenium::WebDriver.for :phantomjs
       end
-      @browser ||= Watir::Browser.new driver, http_client: client
     end
 
     def client
@@ -40,7 +32,8 @@ module Html
     end
 
     def object
-      @browser
+      return unless driver.present?
+      @browser ||= Watir::Browser.new driver, http_client: client
     end
   end
 end

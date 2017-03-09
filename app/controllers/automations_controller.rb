@@ -17,7 +17,8 @@ class AutomationsController < ApplicationController
 
   def execute
     automation = current_user.automations.find(params[:automation_id])
-    executor = Automations::Executor.new(automation)
+    browser = Html::BrowserBuilder.new(automation.browser_type).build
+    executor = Automations::Executor.new(automation, browser)
 
     if executor.run
       redirect_to automations_path, notice: 'Automation was successfully executed.'
@@ -80,7 +81,12 @@ class AutomationsController < ApplicationController
                                        procedures_attributes: [:id,
                                                                :automation_id,
                                                                :position,
-                                                               :script,
+                                                               :category,
+                                                               :path,
+                                                               :selector,
+                                                               :action,
+                                                               :input,
+                                                               :fill_into,
                                                                :_destroy])
   end
 end
