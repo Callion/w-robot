@@ -39,33 +39,67 @@
   <h2>Procedures</h2>
   <hr>
   <% @pos_next = 0 %>
+  <table class="table">
+    <tr>
+      <th>Position</th>
+      <th>Category</th>
+      <th>Selector</th>
+      <th>Path</th>
+      <th>Action</th>
+      <th>Input</th>
+      <th>Fill into</th>
+      <th>Cut</th>
+    </tr>
   <%= f.fields_for :procedures do |t| %>
     <% @pos_next += 1 %>
-    <div class='row mb-10'>
-      <div class='col-md-2'>
+    <tr>
+      <td>
         <div class='form-group position'>
-          <%= t.label :position %>
           <%= t.text_field :position, class: 'form-control', placeholder: @pos_next %>
         </div>
-      </div>
-      <div class='col-md-8'>
+      </td>
+      <td>
         <div class="form-group script <%= form_coloring(t.object.broken) %>">
-          <%= t.label :script %>
-          <%= t.text_field :script, class: 'form-control', placeholder: 'Enter evaluatable script' %>
+          <%= t.select :category, options_for_categories, { include_blank: true }, class: 'form-control' %>
         </div>
-      </div>
-
-      <% if t.object.persisted? %>
-        <div class='col-md-2'>
+      </td>
+      <td>
+        <div class="form-group script <%= form_coloring(t.object.broken) %>">
+          <%= t.select :selector, options_for_selectors, { include_blank: true }, class: 'form-control' %>
+        </div>
+      </td>
+      <td>
+        <div class="form-group script <%= form_coloring(t.object.broken) %>">
+          <%= t.text_field :path, class: 'form-control', placeholder: 'Enter path' %>
+        </div>
+      </td>
+      <td>
+        <div class="form-group script <%= form_coloring(t.object.broken) %>">
+          <%= t.select :action, options_for_actions, { include_blank: true }, class: 'form-control' %>
+        </div>
+      </td>
+      <td>
+        <div class="form-group script <%= form_coloring(t.object.broken) %>">
+          <%= t.text_field :input, class: 'form-control', placeholder: 'Enter argument' %>
+        </div>
+      </td>
+      <td>
+        <div class='form-group position'>
+          <%= t.text_field :fill_into, class: 'form-control' %>
+        </div>
+      </td>
+      <td>
+        <% if t.object.persisted? %>
           <div class='checkbox'>
             <label>
-              <%= t.check_box :_destroy %> Cut
+              <%= t.check_box :_destroy %>
             </label>
           </div>
-        </div>
-      <% end %>
-    </div>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
+</table>
   <br>
 
   <div class="form-group">

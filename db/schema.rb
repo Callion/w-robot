@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_170_306_124_902) do
+ActiveRecord::Schema.define(version: 20_170_309_201_409) do
   create_table 'automations', force: :cascade do |t|
     t.string   'name'
     t.boolean  'active'
@@ -24,8 +24,13 @@ ActiveRecord::Schema.define(version: 20_170_306_124_902) do
   create_table 'procedures', force: :cascade do |t|
     t.integer 'automation_id'
     t.integer 'position'
-    t.string  'script'
     t.boolean 'broken'
+    t.integer 'category'
+    t.integer 'selector'
+    t.string  'path'
+    t.integer 'action'
+    t.string  'input'
+    t.integer 'fill_into'
   end
 
   create_table 'users', force: :cascade do |t|

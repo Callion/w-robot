@@ -5,7 +5,7 @@ module Automations
     setup do
       @automation = FactoryGirl.create(:automation)
       @automation.procedures << FactoryGirl.create(:procedure)
-      @service = Automations::Executor.new(@automation)
+      @service = Automations::Executor.new(@automation, TestBrowser.new)
     end
 
     test 'successfully executed' do

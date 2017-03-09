@@ -16,6 +16,11 @@
 .position label{
     width: 60%;
 }
+form .row > div{
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
 .position .form-control{
     width: 40%;
     margin-left: -5px;
@@ -39,10 +44,6 @@
 }
 .script label{
     width: 10%;
-}
-.script .form-control{
-    width: 90%;
-    margin-left: -5px;
 }
 .script.invalid .form-control{
     background-color: #fca5a5;

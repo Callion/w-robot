@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 module Automations
   class Executor
-    DEFAULT_TIMEOUT = 5
+    attr_reader :automation, :browser
 
-    attr_reader :automation
-
-    def initialize(automation)
+    def initialize(automation, browser)
       @automation = automation
+      @browser = browser
     end
 
     def run
@@ -20,10 +19,6 @@ module Automations
     end
 
     private
-
-    def browser
-      @browser ||= Html::Browser.new(timeout: DEFAULT_TIMEOUT, type: automation.browser_type).object
-    end
 
     def close_browser
       browser.close if browser.present?

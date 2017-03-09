@@ -3,8 +3,8 @@ require 'test_helper'
 module Automations
   class EvaluatorTest < ActiveSupport::TestCase
     setup do
-      @browser = OpenStruct.new(goto: '')
-      @procedure = FactoryGirl.create(:procedure, script: "goto ='google.cz'")
+      @browser = TestBrowser.new
+      @procedure = FactoryGirl.create(:procedure)
       @service = Automations::Evaluator.new(@procedure, @browser)
     end
 
@@ -14,7 +14,10 @@ module Automations
     end
 
     test 'unsuccessfully evaluated goto method' do
-      @procedure.script = "hello ''"
+      @procedure.category = :button
+      @procedure.selector = :css
+      @procedure.path = 'no_path'
+      @procedure.action = :click
       @service.run
       assert @service.procedure.broken
     end

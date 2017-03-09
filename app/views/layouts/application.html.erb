@@ -27,29 +27,22 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href= "/">wRobot</a>
+        <ul class="nav navbar-nav">
+          <% unless current_user.nil? %>
+            <li><%= link_to I18n.t('automations.new'), new_automation_path %></li>
+            <li><%= link_to I18n.t('users.edit'), edit_user_registration_path %></li>
+            <li><%= link_to I18n.t('users.log_out'), destroy_user_session_path, method: :delete %></li>
+          <% end %>
+        </ul>
       </div>
     </div>
 
     <div class="container">
       <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-12">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
-        <div class="col-lg-3">
-          <div class="well sidebar-nav">
-            <h3>Menu</h3>
-            <ul class="nav nav-list">
-              <% unless current_user.nil? %>
-                <li class="nav-header"><%= I18n.t('automations.title') %></li>
-                <li><%= link_to I18n.t('automations.new'), new_automation_path %></li>
-                <li class="nav-header"><%= I18n.t('users.title') %></li>
-                <li><%= link_to I18n.t('users.edit'), edit_user_registration_path %></li>
-                <li><%= link_to I18n.t('users.log_out'), destroy_user_session_path, method: :delete %></li>
-              <% end %>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
       </div><!--/row-->
 
       <div class='footer'>
