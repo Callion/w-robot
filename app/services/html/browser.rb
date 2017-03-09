@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 module Html
   class Browser
-    FIREFOX = 'firefox'
-    CHROME = 'chrome'
-    PHANTOMJS = 'phantomjs'
+    FIREFOX = 'firefox'.freeze
+    CHROME = 'chrome'.freeze
+    PHANTOMJS = 'phantomjs'.freeze
 
     BROWSERS = [FIREFOX, CHROME, PHANTOMJS].freeze
 

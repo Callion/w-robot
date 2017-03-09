@@ -3,7 +3,9 @@ require 'test_helper'
 
 class AutomationsControllerTest < ActionController::TestCase
   setup do
-    @automation = automations(:one)
+    @user = FactoryGirl.create(:user)
+    @automation = FactoryGirl.create(:automation, user: @user)
+    sign_in @user
   end
 
   test 'should get index' do
@@ -19,15 +21,10 @@ class AutomationsControllerTest < ActionController::TestCase
 
   test 'should create automation' do
     assert_difference('Automation.count') do
-      post :create, automation: { active: @automation.active, name: @automation.name }
+      post :create, automation: { active: @automation.active, name: @automation.name, browser_type: 'Firefox' }
     end
 
-    assert_redirected_to automation_path(assigns(:automation))
-  end
-
-  test 'should show automation' do
-    get :show, id: @automation
-    assert_response :success
+    assert_redirected_to edit_automation_path(assigns(:automation))
   end
 
   test 'should get edit' do
@@ -37,7 +34,7 @@ class AutomationsControllerTest < ActionController::TestCase
 
   test 'should update automation' do
     patch :update, id: @automation, automation: { active: @automation.active, name: @automation.name }
-    assert_redirected_to automation_path(assigns(:automation))
+    assert_redirected_to edit_automation_path(assigns(:automation))
   end
 
   test 'should destroy automation' do
