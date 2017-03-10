@@ -5,10 +5,14 @@ Dir[Rails.root.join('test/support/**/*')].each { |f| require f }
 require 'rails/test_help'
 require 'mocha/mini_test'
 
-class ActiveSupport::TestCase
-  include FactoryGirl::Syntax::Methods
+module ActionSupport
+  class TestCase
+    include FactoryGirl::Syntax::Methods
+  end
 end
 
-class ActionController::TestCase
-  include Devise::Test::ControllerHelpers
+module ActionController
+  class TestCase
+    include Devise::Test::ControllerHelpers
+  end
 end
