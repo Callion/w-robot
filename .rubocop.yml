@@ -5,6 +5,9 @@ AllCops:
     - 'vendor/**/*'
     - 'spec/fixtures/**/*'
     - 'tmp/**/*'
+    - 'db/schema.rb'
+    - 'db/seeds.rb'
+    - 'config/initializers/**'
   TargetRubyVersion: 2.1
 
 Style/Encoding:
@@ -25,3 +28,11 @@ Metrics/BlockLength:
     - 'Rakefile'
     - '**/*.rake'
     - 'spec/**/*.rb'
+
+Metrics/MethodLength:
+  Max: 15
+  Exclude:
+    - 'db/migrate/**'
+
+Metrics/AbcSize:
+  Enabled: false

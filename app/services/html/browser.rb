@@ -20,15 +20,14 @@ module Html
                     Selenium::WebDriver.for :firefox, driver_path: Rails.application.config.firefox_path
                   when PHANTOMJS
                     Selenium::WebDriver.for :phantomjs
-      end
+                  end
     end
 
     def client
       @client ||= Selenium::WebDriver::Remote::Http::Default.new
-      if @timeout.present?
-        @client.read_timeout = @timeout
-        @client.open_timeout = @timeout
-      end
+      return unless @timeout.present?
+      @client.read_timeout = @timeout
+      @client.open_timeout = @timeout
     end
 
     def object
