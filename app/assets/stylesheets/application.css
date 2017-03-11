@@ -67,18 +67,14 @@ form .row > div{
 }
 .devise{
   position: fixed;
-  top: 23%;
-  left: 45%;
-  margin-top: -50px;
-  margin-left: -100px;
+  top: 22%;
+  width: 93%;
+  margin: -25px;
   text-align: center;
-}
-.devise.edit{
-  left: 35%;
 }
 .footer {
    position: fixed;
-   width: inherit;
+   width: 89%;
    bottom: 0;
    text-align: center;
    background-color: whitesmoke;
