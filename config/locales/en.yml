@@ -35,6 +35,16 @@ en:
     booleans:
       'true': 'Yes'
       'false': 'No'
-    wtf:
-      aha: ne
-      abe: jo
+    selectors:
+      klass_name: NAME
+      klass: CLASS
+      id: ID
+      xpath: XPATH
+      css: CSS
+      placeholder: PLACEHOLDER
+    categories:
+      div: DIV
+      element: ELEMENT
+      button: BUTTON
+      text_field: TEXT_FIELD
+      textarea: TEXT_AREA

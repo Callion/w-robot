@@ -5,14 +5,14 @@ module OptionsHelper
   end
 
   def options_for_categories
-    Procedure.categories.map { |category, _key| [category, category] }
+    Procedure.categories.map { |category, _key| [t("enums.categories.#{category}"), category] }
   end
 
   def options_for_selectors
-    Procedure.selectors.map { |selector, _key| [selector, selector] }
+    Procedure.selectors.map { |selector, _key| [t("enums.selectors.#{selector}"), selector] }
   end
 
   def options_for_actions
-    Procedure.actions.map { |action, _key| [action, action] }
+    Procedure.actions.map { |action, _key| [action.to_s.upcase, action] }
   end
 end
