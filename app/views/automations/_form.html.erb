@@ -99,7 +99,7 @@
       <td>
         <% if t.object.persisted? %>
           <%= link_to 'X', automation_path(@automation.id, automation: { procedures_attributes: { id: t.object.id, "_destroy" => true }}), remote: true, method: :put, data: { confirm: t('.confirm', default: t('helpers.links.confirm', default: 'Are you sure?')) },
-          class: 'btn btn-xs btn-danger' %>
+          class: 'btn btn-xs btn-danger own' %>
         <% end %>
       </td>
     </tr>
