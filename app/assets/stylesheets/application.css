@@ -69,11 +69,8 @@ form .row > div{
   align-items: center;
 }
 .devise{
-  position: fixed;
-  top: 22%;
-  width: 93%;
-  margin: -25px;
   text-align: center;
+  padding-top: 5%;
 }
 .footer {
   position: fixed;
