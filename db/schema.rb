@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309201409) do
+ActiveRecord::Schema.define(version: 20170331101935) do
 
   create_table "automations", force: :cascade do |t|
     t.string   "name"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20170309201409) do
     t.integer "action"
     t.string  "input"
     t.integer "fill_into"
+    t.string  "name"
   end
 
   create_table "users", force: :cascade do |t|

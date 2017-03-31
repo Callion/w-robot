@@ -23,6 +23,7 @@ en:
   automations:
     title: Automation
     new: New automation
+    index: Overview
   users:
     title: User
     edit: Settings

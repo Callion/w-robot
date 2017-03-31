@@ -15,4 +15,8 @@ module OptionsHelper
   def options_for_actions
     Procedure.actions.map { |action, _key| [action.to_s.upcase, action] }
   end
+
+  def options_for_filling(automation)
+    automation.procedures.map(&:position).compact
+  end
 end

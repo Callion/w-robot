@@ -13,6 +13,10 @@
  *= require_tree .
  *= require_self
  */
+.navbar {
+  background-color: rgba(145, 223, 255, 0.17);
+  border-bottom: 1px ridge rgb(96, 93, 127);
+}
 .position label{
     width: 60%;
 }
@@ -22,8 +26,7 @@ form .row > div{
 }
 
 .position .form-control{
-    width: 40%;
-    margin-left: -5px;
+    width: 75%;
 }
 .name label{
     width: 10%;
@@ -73,9 +76,12 @@ form .row > div{
   text-align: center;
 }
 .footer {
-   position: fixed;
-   width: 89%;
-   bottom: 0;
-   text-align: center;
-   background-color: whitesmoke;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+  padding-top: 5px;
+  background-color: rgba(145, 223, 255, 0.17);
+  border-top: 1px ridge rgb(96, 93, 127);
+  color: rgb(96, 93, 127);
 }
