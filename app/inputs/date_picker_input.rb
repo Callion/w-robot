@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class DatePickerInput < SimpleForm::Inputs::StringInput
   def input(wrapper_options)
     set_html_options
@@ -10,7 +11,7 @@ class DatePickerInput < SimpleForm::Inputs::StringInput
   end
 
   def input_html_classes
-    super.push ''   # 'form-control'
+    super.push '' # 'form-control'
   end
 
   private
@@ -52,9 +53,9 @@ class DatePickerInput < SimpleForm::Inputs::StringInput
 
   def date_options_base
     {
-        locale: I18n.locale.to_s,
-        format: picker_pattern,
-        dayViewHeaderFormat: date_view_header_format
+      locale: I18n.locale.to_s,
+      format: picker_pattern,
+      dayViewHeaderFormat: date_view_header_format
     }
   end
 
@@ -62,5 +63,4 @@ class DatePickerInput < SimpleForm::Inputs::StringInput
     custom_options = input_html_options[:data][:date_options] || {}
     date_options_base.merge!(custom_options)
   end
-
 end

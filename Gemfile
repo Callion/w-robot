@@ -39,9 +39,9 @@ gem 'simple_form'
 
 gem 'delayed_job_active_record'
 
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 
-gem 'momentjs-rails', '~> 2.9',  :github => 'derekprior/momentjs-rails'
+gem 'momentjs-rails', '~> 2.9', github: 'derekprior/momentjs-rails'
 
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
 

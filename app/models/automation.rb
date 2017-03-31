@@ -21,9 +21,8 @@ class Automation < ActiveRecord::Base
   private
 
   def execute_at_in_future
-    if execute_at.present? && execute_at.to_date < Time.zone.now
-      errors.add(:execute_at, "can't be in the past")
-    end
+    return unless execute_at.present? && execute_at.to_date < Time.zone.now
+    errors.add(:execute_at, "can't be in the past")
   end
 
   def delayed_execution
