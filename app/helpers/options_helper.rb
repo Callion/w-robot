@@ -16,6 +16,10 @@ module OptionsHelper
     Procedure.actions.map { |action, _key| [action.to_s.upcase, action] }
   end
 
+  def options_for_repetititons
+    Automation.repetitions.map { |repetition, _key| [t("enums.repetitions.#{repetition}"), repetition] }
+  end
+
   def options_for_filling(automation)
     automation.procedures.map(&:position).compact
   end
