@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module Wrobot
   class Application < Rails::Application
+    config.active_job.queue_adapter = :delayed_job
+
     # SELECT YOUR "#{browser_type}"_path ACCORDING TO YOUR OPERATING SYSTEM //lib/drivers/.
 
     config.firefox_path = 'lib/drivers/os_x/geckodriver'

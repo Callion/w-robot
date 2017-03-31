@@ -77,7 +77,7 @@ class AutomationsController < ApplicationController
   end
 
   def automation_params
-    params.require(:automation).permit(:name, :active, :data, :browser_type, :user_id,
+    params.require(:automation).permit(:name, :active, :data, :browser_type, :repetition, :execute_at, :user_id,
                                        procedures_attributes: [:id,
                                                                :automation_id,
                                                                :position,

@@ -10,7 +10,8 @@
       <th><%= model_class.human_attribute_name(:active) %></th>
       <th><%= model_class.human_attribute_name(:data) %></th>
       <th><%= model_class.human_attribute_name(:browser_type) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:execute_at) %></th>
+      <th><%= model_class.human_attribute_name(:repetition) %></th>
       <th><%=t '.actions', default: t('helpers.actions') %></th>
     </tr>
   </thead>
@@ -24,7 +25,8 @@
           <%= render :partial => 'related_procedures', locals: { automation: automation } %>
         </td>
         <td> <%= I18n.t("enums.browser_types.#{automation.browser_type}") %> </td>
-        <td><%=l automation.created_at.to_date %></td>
+        <td><%= automation.execute_at.strftime('%m/%d/%Y %H:%M') if automation.execute_at.present? %></td>
+        <td><%= I18n.t("enums.repetitions.#{automation.repetition}") if automation.repetition.present? %></td>
         <td>
           <%= link_to t('.execute'), automation_execute_path(automation),
                       method: :post,
