@@ -50,7 +50,6 @@ en:
       text_field: TEXT_FIELD
       textarea: TEXT_AREA
     repetitions:
-      never: Never
       every_5_min: 5 mins
       every_hour: Hourly
       every_day: Daily
