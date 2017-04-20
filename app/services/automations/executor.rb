@@ -10,15 +10,13 @@ module Automations
 
     def run
       automation.procedures.by_position.each do |procedure|
+        procedure.reload # refresh procedure, if it has been updated in process
         evaluator = Automations::Evaluator.new(procedure, browser)
         evaluator.run
         return false if evaluator.broken
       end
-      close_browser
       true
     end
-
-    private
 
     def close_browser
       browser.close if browser.present?

@@ -1,0 +1,26 @@
+<%- model_class = Log -%>
+<div class="page-header">
+  <h1><%=t '.title', default: model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:message) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @logs.each do |log| %>
+      <tr>
+        <td><%= log.created_at.strftime('%d.%m.%Y - %H:%M') %></td>
+        <td><%= log.message %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="span9 centred">
+  <div class="form-group button">
+    <%= link_to t('.return', default: t("helpers.links.return")),
+              automations_path, class: 'btn btn-default' %>
+  </div>
+</div>

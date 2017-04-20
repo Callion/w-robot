@@ -28,6 +28,8 @@ en:
     title: User
     edit: Settings
     log_out: Log out
+  logs:
+    index: Log
   enums:
     browser_types:
       firefox: 'Firefox'

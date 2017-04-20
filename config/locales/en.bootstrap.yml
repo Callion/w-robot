@@ -13,6 +13,7 @@ en:
       destroy: "Delete"
       new: "New"
       edit: "Edit"
+      return: Return
     titles:
       edit: "Edit %{model}"
       save: "Save %{model}"

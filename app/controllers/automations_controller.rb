@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 # Documentation comment
-require 'watir/extensions/select_text'
-
 class AutomationsController < ApplicationController
   before_action :set_automation, only: [:edit, :update, :destroy]
+  after_action :end_execute, only: :execute
 
   def index
     @automations = current_user.automations
@@ -18,14 +17,15 @@ class AutomationsController < ApplicationController
   def execute
     automation = current_user.automations.find(params[:automation_id])
     browser = Html::BrowserBuilder.new(automation.browser_type).build
-    executor = Automations::Executor.new(automation, browser)
+    @executor = Automations::Executor.new(automation, browser)
 
-    if executor.run
+    if @executor.run
       redirect_to automations_path, notice: 'Automation was successfully executed.'
     else
       procedure = automation.procedures.where(broken: true).first
       redirect_to edit_automation_path(automation), alert: "Procedure at #{procedure.position}. position failed!"
     end
+    Logs::Logger.new(automation).conserve
   end
 
   def create
@@ -76,10 +76,15 @@ class AutomationsController < ApplicationController
     @automation = current_user.automations.find(params[:id])
   end
 
+  def end_execute
+    @executor.close_browser
+  end
+
   def automation_params
     params.require(:automation).permit(:name, :active, :data, :browser_type, :repetition, :execute_at, :user_id,
                                        procedures_attributes: [:id,
                                                                :automation_id,
+                                                               :name,
                                                                :position,
                                                                :category,
                                                                :path,
