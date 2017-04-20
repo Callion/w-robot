@@ -30,7 +30,7 @@ class Automation < ActiveRecord::Base
     return job.delete if job.present? && execute_at.nil?
     return if execute_at.nil?
     if !job.present?
-      job = self.delay(run_at: execute_at, automation_id: id).execute
+      delay(run_at: execute_at, automation_id: id).execute
     else
       job.update(run_at: execute_at)
     end
@@ -41,9 +41,9 @@ class Automation < ActiveRecord::Base
     executor = Automations::Executor.new(self, browser)
     if executor.run
       next_execution if repetition.present?
-    else
-      # TODO: Send mail with unsuccesfull try
     end
+    Logs::Logger.new(self).conserve
+    executor.close_browser
   end
 
   def next_execution

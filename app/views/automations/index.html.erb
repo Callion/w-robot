@@ -25,7 +25,7 @@
           <%= render :partial => 'related_procedures', locals: { automation: automation } %>
         </td>
         <td> <%= I18n.t("enums.browser_types.#{automation.browser_type}") %> </td>
-        <td><%= automation.execute_at.strftime('%m/%d/%Y %H:%M') if automation.execute_at.present? %></td>
+        <td><%= automation.execute_at.strftime('%d.%m.%Y - %H:%M') if automation.execute_at.present? %></td>
         <td><%= I18n.t("enums.repetitions.#{automation.repetition}") if automation.repetition.present? %></td>
         <td>
           <%= link_to t('.execute'), automation_execute_path(automation),
