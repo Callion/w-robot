@@ -45,6 +45,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    @category.automations.each { |automation| automation.update(category_id: nil) }
     @category.destroy
     respond_to do |format|
       format.html do
