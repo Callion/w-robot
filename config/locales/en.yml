@@ -24,6 +24,10 @@ en:
     title: Automation
     new: New automation
     index: Overview
+  categories:
+    title: Category
+    new: New category
+    index: Overview
   users:
     title: User
     edit: Settings

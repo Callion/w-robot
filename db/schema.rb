@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170420105930) do
+ActiveRecord::Schema.define(version: 20170425133540) do
 
   create_table "automations", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20170420105930) do
     t.integer  "user_id"
     t.datetime "execute_at"
     t.integer  "repetition"
+    t.integer  "category_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string  "name"
+    t.string  "color",    default: "#000000"
+    t.integer "priority", default: 0
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -44,8 +51,9 @@ ActiveRecord::Schema.define(version: 20170420105930) do
   create_table "logs", force: :cascade do |t|
     t.string   "message"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "automation_id"
   end
 
   create_table "procedures", force: :cascade do |t|

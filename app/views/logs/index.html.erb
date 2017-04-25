@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     <% @logs.each do |log| %>
-      <tr>
+      <tr class='clickable-row' data-href='/automations/<%= log.automation_id %>/edit'>
         <td><%= log.created_at.strftime('%d.%m.%Y - %H:%M') %></td>
         <td><%= log.message %></td>
       </tr>

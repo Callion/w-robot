@@ -2,44 +2,97 @@
 <div class="page-header">
   <h1><%=t '.title', default: model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:active) %></th>
-      <th><%= model_class.human_attribute_name(:data) %></th>
-      <th><%= model_class.human_attribute_name(:browser_type) %></th>
-      <th><%= model_class.human_attribute_name(:execute_at) %></th>
-      <th><%= model_class.human_attribute_name(:repetition) %></th>
-      <th><%=t '.actions', default: t('helpers.actions') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @automations.each do |automation| %>
+<% Category.by_priority.each_with_index do |category, index| %>
+  <button class="btn btn-default btn-xs" style="background-color: <%=category.color%>; color: white" type="button" data-toggle="collapse" data-target="#collapseTable<%=index%>" aria-controls="collapseTable<%=index%>">
+    <%= category.name %>
+  </button>
+  <div class="collapse collapse in" id="collapseTable<%=index%>">
+    <table class="table table-striped" aria-expanded="true">
+      <thead>
+        <tr>
+          <th><%= model_class.human_attribute_name(:id) %></th>
+          <th><%= model_class.human_attribute_name(:name) %></th>
+          <th><%= model_class.human_attribute_name(:active) %></th>
+          <th><%= model_class.human_attribute_name(:data) %></th>
+          <th><%= model_class.human_attribute_name(:browser_type) %></th>
+          <th><%= model_class.human_attribute_name(:execute_at) %></th>
+          <th><%= model_class.human_attribute_name(:repetition) %></th>
+          <th><%=t '.actions', default: t('helpers.actions') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @automations.where(category_id: category.id).each do |automation| %>
+          <tr>
+            <td><%= automation.id %></td>
+            <td><%= automation.name %></td>
+            <td><%= I18n.t("enums.booleans.#{automation.active}") %></td>
+            <td>
+              <%= render :partial => 'related_procedures', locals: { automation: automation } %>
+            </td>
+            <td> <%= I18n.t("enums.browser_types.#{automation.browser_type}") %> </td>
+            <td><%= automation.execute_at.strftime('%d.%m.%Y - %H:%M') if automation.execute_at.present? %></td>
+            <td><%= I18n.t("enums.repetitions.#{automation.repetition}") if automation.repetition.present? %></td>
+            <td>
+              <%= link_to t('.execute'), automation_execute_path(automation),
+                          method: :post,
+                          class: 'btn btn-success btn-xs',
+                          disabled: !automation.active? %>
+              <%= link_to t('.edit'), edit_automation_path(automation), class: 'btn btn-default btn-xs' %>
+              <%= link_to t('.destroy'),
+                          automation_path(automation),
+                          method: :delete,
+                          data: { confirm: t('.confirm', default: t('helpers.links.confirm', default: 'Are you sure?')) },
+                          class: 'btn btn-xs btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+<button class="btn btn-default btn-xs" style="background-color: #484150; color: white" type="button" data-toggle="collapse" data-target="#collapseTableUncategorized" aria-controls="collapseTableUncategorized">
+  Uncategorized
+</button>
+<div class="collapse collapse in" id="collapseTableUncategorized" aria-expanded="true">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= automation.id %></td>
-        <td><%= automation.name %></td>
-        <td><%= I18n.t("enums.booleans.#{automation.active}") %></td>
-        <td>
-          <%= render :partial => 'related_procedures', locals: { automation: automation } %>
-        </td>
-        <td> <%= I18n.t("enums.browser_types.#{automation.browser_type}") %> </td>
-        <td><%= automation.execute_at.strftime('%d.%m.%Y - %H:%M') if automation.execute_at.present? %></td>
-        <td><%= I18n.t("enums.repetitions.#{automation.repetition}") if automation.repetition.present? %></td>
-        <td>
-          <%= link_to t('.execute'), automation_execute_path(automation),
-                      method: :post,
-                      class: 'btn btn-success btn-xs',
-                      disabled: !automation.active? %>
-          <%= link_to t('.edit'), edit_automation_path(automation), class: 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy'),
-                      automation_path(automation),
-                      method: :delete,
-                      data: { confirm: t('.confirm', default: t('helpers.links.confirm', default: 'Are you sure?')) },
-                      class: 'btn btn-xs btn-danger' %>
-        </td>
+        <th><%= model_class.human_attribute_name(:id) %></th>
+        <th><%= model_class.human_attribute_name(:name) %></th>
+        <th><%= model_class.human_attribute_name(:active) %></th>
+        <th><%= model_class.human_attribute_name(:data) %></th>
+        <th><%= model_class.human_attribute_name(:browser_type) %></th>
+        <th><%= model_class.human_attribute_name(:execute_at) %></th>
+        <th><%= model_class.human_attribute_name(:repetition) %></th>
+        <th><%=t '.actions', default: t('helpers.actions') %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @automations.where(category_id: nil).each do |automation| %>
+        <tr>
+          <td><%= automation.id %></td>
+          <td><%= automation.name %></td>
+          <td><%= I18n.t("enums.booleans.#{automation.active}") %></td>
+          <td>
+            <%= render :partial => 'related_procedures', locals: { automation: automation } %>
+          </td>
+          <td> <%= I18n.t("enums.browser_types.#{automation.browser_type}") %> </td>
+          <td><%= automation.execute_at.strftime('%d.%m.%Y - %H:%M') if automation.execute_at.present? %></td>
+          <td><%= I18n.t("enums.repetitions.#{automation.repetition}") if automation.repetition.present? %></td>
+          <td>
+            <%= link_to t('.execute'), automation_execute_path(automation),
+                        method: :post,
+                        class: 'btn btn-success btn-xs',
+                        disabled: !automation.active? %>
+            <%= link_to t('.edit'), edit_automation_path(automation), class: 'btn btn-default btn-xs' %>
+            <%= link_to t('.destroy'),
+                        automation_path(automation),
+                        method: :delete,
+                        data: { confirm: t('.confirm', default: t('helpers.links.confirm', default: 'Are you sure?')) },
+                        class: 'btn btn-xs btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
