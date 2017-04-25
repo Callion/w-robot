@@ -13,7 +13,7 @@ module Logs
     private
 
     def log_creation
-      log = Log.create(user_id: automation.user_id)
+      log = Log.create(user_id: automation.user_id, automation_id: automation.id)
       log.message = if automation_is_valid?
                       automation_description + 'was successfully executed'
                     else

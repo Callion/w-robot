@@ -12,9 +12,23 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.minicolors
 //= require twitter/bootstrap
 //= require turbolinks
 //= require moment
 //= require pickers
 //= require bootstrap-datetimepicker
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+
+$(document).on('turbolinks:load', function() {
+    $('[data-minicolors]').each(function(i, elem) {
+        var input = $(this);
+        input.minicolors(input.data('minicolors'));
+    });
+});

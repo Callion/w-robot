@@ -23,4 +23,8 @@ module OptionsHelper
   def options_for_filling(automation)
     automation.procedures.map(&:position).compact
   end
+
+  def options_for_groups
+    Category.all.map { |category| [category.name, category.id] }
+  end
 end

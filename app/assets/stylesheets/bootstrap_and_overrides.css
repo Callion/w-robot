@@ -38,3 +38,17 @@ a.btn.btn-xs.btn-danger.own {
   vertical-align: top;
   border-top: 1px solid #ddd
 }
+.minicolors-theme-default .minicolors-input {
+  height: auto;
+  width: auto;
+  display: inline-block;
+  padding-left: 35px;
+  margin-left: 4px;
+}
+
+.minicolors-theme-default .minicolors-swatch {
+  top: 8px;
+  left: 15px;
+  width: 18px;
+  height: 18px;
+}

@@ -18,7 +18,7 @@ script1 = [
   { position: 7, category: :element, selector: :xpath, path: '//section/div[2]/dl/div[2]/dd/div/input', action: :send_keys, input: 'MValda@seznam.cz' },
   { position: 8, category: :element, selector: :xpath, path: '//section/div[2]/dl/div[5]/dd/input', action: :send_keys, input: 'TEST' },
   { position: 9, category: :element, selector: :xpath, path: '//section/div[2]/div[1]/button', action: :click },
-  { position: 10, category: :element, selector: :xpath, path: '//div[4]/div/button[1]', action: :click },
+  { position: 10, category: :element, selector: :xpath, path: '//div[5]/div/button[1]', action: :click },
   { position: 11, category: :textarea, selector: :xpath, path: '//section/div[2]/div[2]/div[1]/textarea', action: :set, input: 'Dobrý den! Tento email byl automaticky vygenerován webovým robotem! Mazec Wau!' },
   { position: 12, category: :element, selector: :xpath, path: '//section/div[3]/button[1]', action: :click }
 ]
